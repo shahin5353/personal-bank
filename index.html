@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Personal Bank</title>
+</head>
+<body>
+<div class="container">
+  <div id="login-area">
+    <h1 class="text-center">Welcome to World Bank</h1>
+    <div class="submit-area">
+      <h4>Login</h4>
+      <input type="email" name="email" placeholder="Email" class="form-control">
+      <br>
+      <input type="password" name="pass" placeholder="Password" class="form-control">
+      <br>
+      <button id="bank-login" type="button" name="button" class="btn btn-success">Enter</button>
+    </div>
+  </div>
+</div>
+
+<div id="transaction-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="deposit status">
+          <h5>Deposit</h5>
+          <h2>$<span id="current-deposit">00</span></h2>
+        </div>
+      </div>
+      <div class="col-md-4">
+       <div class="withdraw status">
+        <h5>Withdraw</h5>
+        <h2>$<span id="current-withdraw">00</span></h2>
+       </div>
+      </div>
+      <div class="col-md-4">
+       <div class="balance status">
+        <h5>Balance</h5>
+        <h2>$<span id="current-balance">00</h2>
+       </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="submit-area">
+          <h4>Deposit</h4>
+          <input id="deposit-amount" class="form-control" placeholder="$ amount you want to deposit" type="text">
+          <br>
+          <button id="deposit-button" class="btn btn-success">Deposit</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+       <div class="submit-area">
+        <h4>Withdraw</h4>
+        <input id="withdraw-amount" class="form-control" placeholder="$ amount you want to withdraw" type="text">
+        <br>
+        <button id="withdraw-button" class="btn btn-success">Withdraw</button>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="mt-5">
+  <p class="text-center text-capitalize pt-5">&copy;all rights reserved | developed by <a href="https://www.facebook.com/shahinmahmud53" class="text-primary text-decoration-none">shahin mahmud</a></p>
+</footer>
+
+
+
+
+
+
+<script>
+  // login button handler
+  const loginBtn = document.getElementById('bank-login');
+  loginBtn.addEventListener('click',function(){
+    const loginArea = document.getElementById("login-area");
+    loginArea.style.display="none";
+    const trnxArea = document.getElementById('transaction-area');
+     trnxArea.style.display="block";
+  });
+  
+  //deposit button handler
+  const depositBtn = document.getElementById('deposit-button');
+  depositBtn.addEventListener('click',function(){
+    const depositAmount = getInput('deposit-amount');
+    updateSpanText('current-deposit',depositAmount);
+    updateSpanText('current-balance',depositAmount);
+    document.getElementById('deposit-amount').value = "";
+  });
+  //withdraw button handler
+  const withdrawBtn = document.getElementById('withdraw-button');
+  withdrawBtn.addEventListener('click',function(){
+    const withdrawAmount = getInput('withdraw-amount');
+    updateSpanText('current-withdraw',withdrawAmount);
+    updateSpanText('current-balance',-1 * withdrawAmount)
+    document.getElementById('withdraw-amount').value = "";
+  });
+  //function
+  function getInput(id){
+    const amount = parseFloat(document.getElementById(id).value);
+    return amount;
+  }
+  function updateSpanText(id,depositAmount){
+      const current = parseFloat(document.getElementById(id).innerText);
+      document.getElementById(id).innerText = current + depositAmount;
+  }
+</script>
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
