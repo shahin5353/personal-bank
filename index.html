@@ -49,7 +49,7 @@
       <div class="col-md-6">
         <div class="submit-area">
           <h4>Deposit</h4>
-          <input id="deposit-amount" class="form-control" placeholder="$ amount you want to deposit" type="text">
+          <input id="deposit-amount" class="form-control" placeholder="$ amount you want to deposit" type="number">
           <br>
           <button id="deposit-button" class="btn btn-success">Deposit</button>
         </div>
@@ -57,7 +57,7 @@
       <div class="col-md-6">
        <div class="submit-area">
         <h4>Withdraw</h4>
-        <input id="withdraw-amount" class="form-control" placeholder="$ amount you want to withdraw" type="text">
+        <input id="withdraw-amount" class="form-control" placeholder="$ amount you want to withdraw" type="number">
         <br>
         <button id="withdraw-button" class="btn btn-success">Withdraw</button>
        </div>
@@ -88,18 +88,22 @@
   //deposit button handler
   const depositBtn = document.getElementById('deposit-button');
   depositBtn.addEventListener('click',function(){
-    const depositAmount = getInput('deposit-amount');
-    updateSpanText('current-deposit',depositAmount);
-    updateSpanText('current-balance',depositAmount);
-    document.getElementById('deposit-amount').value = "";
+    const depositAmount = getInput("deposit-amount");
+    if(isNaN(depositAmount)==false){
+      updateSpanText('current-deposit',depositAmount);
+      updateSpanText('current-balance',depositAmount);
+      document.getElementById('deposit-amount').value = "";
+    }
   });
   //withdraw button handler
   const withdrawBtn = document.getElementById('withdraw-button');
   withdrawBtn.addEventListener('click',function(){
-    const withdrawAmount = getInput('withdraw-amount');
-    updateSpanText('current-withdraw',withdrawAmount);
-    updateSpanText('current-balance',-1 * withdrawAmount)
-    document.getElementById('withdraw-amount').value = "";
+    const withdrawAmount = getInput("withdraw-amount");
+    if(isNaN(withdrawAmount)==false){
+      updateSpanText('current-withdraw',withdrawAmount);
+      updateSpanText('current-balance',-1 * withdrawAmount)
+      document.getElementById('withdraw-amount').value = "";
+    }
   });
   //function
   function getInput(id){
